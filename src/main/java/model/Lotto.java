@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> lottoNumbers;
@@ -12,5 +13,10 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + lottoNumbers.stream().map(i -> Integer.toString(i)).collect(Collectors.joining(", ")) + "]";
     }
 }
