@@ -16,17 +16,20 @@
   - [x] 만들어진 숫자를 출력한다.
 - [ ] 지난주 당첨번호와 보너스볼 숫자를 입력받는다.
 - [ ] 당첨 통계를 출력한다.
-  - [ ] 구매한 리스트와 당첨번호를 비교한다.
-  - [ ] 일치하는 개수를 추출한다. (3개, 4개, 5개, 5.5개, 6개)
-  - [ ] 수익률을 계산한다.
+  - [x] 구매한 리스트와 당첨번호를 비교한다.
+  - [x] 일치하는 개수를 추출한다. (3개, 4개, 5개, 5.5개, 6개)
+  - [x] 수익률을 계산한다.
   - [ ] 결과를 출력한다.
 
 ## 구조
 * Model
-  * Lotto
-  * Lottos
-  * WinningLotto
-  * RandomNumbers
+  * Lotto: 로또 객체
+  * LottoPrize: 로또 상금
+  * LottoResult: 로또 당첨 결과
+  * Lottos: 로또 여러 번 시행 객체
+  * LottoScore: 당첨 번호와 일치하는 숫자 갯수 객체
+  * WinningLotto: 당첨 번호
+  * RandomNumbers: 로또 번호 생성
 * Controller
   * LottoController
 * View

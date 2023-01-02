@@ -22,6 +22,7 @@ public class LottosTest {
 
     @ParameterizedTest
     @MethodSource("generateLottosResultData")
+    @DisplayName("랜덤 생성한 숫자로 로또를 생성했을 때 정렬된 상태로 생성이 된다")
     void lottosResultTest(List<Integer> randomNumbers, int times, String expected) {
         Lottos lottos = new Lottos(createRandomNumbers(randomNumbers));
         lottos.generate(times);
@@ -31,7 +32,7 @@ public class LottosTest {
     static Stream<Arguments> generateLottosResultData() {
         return Stream.of(
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), 1, "[1, 2, 3, 4, 5, 6]"),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 2, "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]"),
+                Arguments.of(List.of(6, 5, 4, 3, 2, 1), 2, "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]"),
                 Arguments.of(List.of(10, 11, 12, 13, 14, 15), 1, "[10, 11, 12, 13, 14, 15]")
         );
     }
