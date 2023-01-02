@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class WinningLottoTest {
-
     @ParameterizedTest
     @MethodSource("generateLottoScoreData")
     @DisplayName("지난 주 당첨번호와 로또 번호를 비교해 올바른 결과값 객체를 생성한다.")

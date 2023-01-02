@@ -1,9 +1,10 @@
 package model;
 
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoPrize {
-    private static final HashMap<LottoScore, Long> prize = new HashMap<>() {{
+    private static final LinkedHashMap<LottoScore, Long> prize = new LinkedHashMap<>() {{
         put(new LottoScore(3, false), 5000L);
         put(new LottoScore(4, false), 50_000L);
         put(new LottoScore(5, false), 1_500_000L);
@@ -18,10 +19,20 @@ public class LottoPrize {
         return prize.getOrDefault(new LottoScore(lottoScore.getMatchNumber(), false), 0L);
     }
 
-//    public String getPrizeString(LottoScore lottoScore) {
-//        if (lottoScore.getMatchNumber() == 5 && lottoScore.isMatchBonus()) {
-//            return String.format("%d개 일치, 보너스 볼 일치(%d원) - ", lottoScore.getMatchNumber(), getPrize(lottoScore));
-//        }
-//        return String.format("%d개 일치 (%d원) - ", lottoScore.getMatchNumber(), getPrize(lottoScore));
-//    }
+    public String formatPrizes(List<LottoScore> lottoScores) {
+        List<String> prizeResults = new ArrayList<>();
+        prize.forEach((lottoScore, prizeMoney) -> {
+            long count = lottoScores.stream().filter(l -> l.compare(lottoScore)).count();
+            prizeResults.add(formatPrize(lottoScore) + count + "개");
+        });
+
+        return prizeResults.stream().collect(Collectors.joining("\n"));
+    }
+
+    public String formatPrize(LottoScore lottoScore) {
+        if (lottoScore.getMatchNumber() == 5 && lottoScore.isMatchBonus()) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - ", lottoScore.getMatchNumber(), getPrize(lottoScore));
+        }
+        return String.format("%d개 일치 (%d원) - ", lottoScore.getMatchNumber(), getPrize(lottoScore));
+    }
 }

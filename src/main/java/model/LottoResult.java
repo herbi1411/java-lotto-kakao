@@ -1,5 +1,8 @@
 package model;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoResult {
     private final Lottos lottos;
     private final WinningLotto winningLotto;
@@ -17,5 +20,13 @@ public class LottoResult {
 
     public double getEarningRate(long money) {
         return (double) getTotalPrize() / money;
+    }
+
+    private List<LottoScore> getLottoScores() {
+        return lottos.getLottos().stream().map(winningLotto::getScore).collect(Collectors.toList());
+    }
+
+    public String getResult() {
+        return this.lottoPrize.formatPrizes(getLottoScores());
     }
 }

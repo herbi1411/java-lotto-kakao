@@ -15,6 +15,21 @@ public class LottoScore {
         return matchNumber;
     }
 
+    public boolean isMatchBonus() {
+        return isMatchBonus;
+    }
+
+    public boolean compare(LottoScore that) {
+        if (this.matchNumber != that.matchNumber) {
+            return false;
+        }
+
+        if (this.matchNumber != 5) {
+            return true;
+        }
+
+        return this.isMatchBonus == that.isMatchBonus;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -28,7 +43,6 @@ public class LottoScore {
     public int hashCode() {
         return Objects.hash(matchNumber, isMatchBonus);
     }
-
 
     @Override
     public String toString() {
