@@ -19,17 +19,17 @@ public class LottoScore {
         return isMatchBonus;
     }
 
-    public boolean compare(LottoScore that) {
-        if (this.matchNumber != that.matchNumber) {
-            return false;
-        }
-
-        if (this.matchNumber != 5) {
-            return true;
-        }
-
-        return this.isMatchBonus == that.isMatchBonus;
-    }
+//    public boolean compare(LottoScore that) {
+//        if (this.matchNumber != that.matchNumber) {
+//            return false;
+//        }
+//
+//        if (this.matchNumber != 5) {
+//            return true;
+//        }
+//
+//        return this.isMatchBonus == that.isMatchBonus;
+//    }
 
     @Override
     public boolean equals(Object o) {

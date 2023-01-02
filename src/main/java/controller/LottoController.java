@@ -1,8 +1,7 @@
 package controller;
 
 import model.LottoResult;
-import model.Lottos;
-import model.RandomNumbers;
+import model.LottoGroup;
 import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
@@ -23,7 +22,7 @@ public class LottoController {
         int times = (int) (money / LOTTO_COST);
         outputView.putTimes(times);
 
-        Lottos lottos = new Lottos(new RandomNumbers());
+        LottoGroup lottos = new LottoGroup(new RandomNumbers());
         lottos.generate(times);
 
         outputView.printLottos(lottos);

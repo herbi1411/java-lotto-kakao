@@ -12,7 +12,7 @@ public class LottoResultTest {
     @ParameterizedTest
     @MethodSource("generateLottosResults")
     void lottosResults(List<List<Integer>> lottosList, WinningLotto winningLotto, long money, double expectedEarningRate) {
-        Lottos lottos = new Lottos(createRandomNumbers(lottosList));
+        LottoGroup lottos = new LottoGroup(createRandomNumbers(lottosList));
         lottos.generate(lottosList.size());
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
         Assertions.assertThat(lottoResult.getEarningRate(money)).isEqualTo(expectedEarningRate);

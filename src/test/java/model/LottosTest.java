@@ -14,9 +14,9 @@ public class LottosTest {
     @Test
     @DisplayName("지정한 횟수만큼 로또 객체를 배열로 생성한다.")
     void lottosLengthTest() {
-        Lottos lottos = new Lottos(new RandomNumbers());
+        LottoGroup lottos = new LottoGroup(new RandomNumbers());
         lottos.generate(10);
-        List<Lotto> lottoList = lottos.getLottos();
+        List<Lotto> lottoList = lottos.getLottoGroup();
         Assertions.assertThat(lottoList.size()).isEqualTo(10);
     }
 
@@ -24,7 +24,7 @@ public class LottosTest {
     @MethodSource("generateLottosResultData")
     @DisplayName("랜덤 생성한 숫자로 로또를 생성했을 때 정렬된 상태로 생성이 된다")
     void lottosResultTest(List<Integer> randomNumbers, int times, String expected) {
-        Lottos lottos = new Lottos(createRandomNumbers(randomNumbers));
+        LottoGroup lottos = new LottoGroup(createRandomNumbers(randomNumbers));
         lottos.generate(times);
         Assertions.assertThat(lottos.toString()).isEqualTo(expected);
     }
