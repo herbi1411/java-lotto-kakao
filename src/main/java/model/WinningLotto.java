@@ -13,7 +13,6 @@ public class WinningLotto {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
-        this.lottoNumbers.add(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
