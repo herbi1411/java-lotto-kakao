@@ -24,6 +24,10 @@ public class LottoController {
         int times = lottos.calcTimes(money);
         outputView.putTimes(times);
 
+        if (times < 1) {
+            return;
+        }
+
         lottos.generate(times);
         outputView.printLottos(lottos);
 
