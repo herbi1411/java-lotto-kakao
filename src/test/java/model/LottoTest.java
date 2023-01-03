@@ -1,11 +1,12 @@
 package model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 
 import java.util.Collections;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     @RepeatedTest(100)
@@ -15,6 +16,6 @@ public class LottoTest {
         List<Integer> generatedNumbers = randomNumbers.generate();
         Lotto lotto = new Lotto(generatedNumbers);
         Collections.sort(generatedNumbers);
-        Assertions.assertThat(lotto.getNumbers()).isEqualTo(generatedNumbers);
+        assertThat(lotto.getNumbers()).isEqualTo(generatedNumbers);
     }
 }
