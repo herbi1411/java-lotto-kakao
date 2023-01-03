@@ -1,16 +1,32 @@
 package view;
 
+import constant.LottoConstant;
+import model.Lotto;
+import model.LottoGroup;
+import model.LottoNumber;
 import model.LottoResult;
-import model.Lottos;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public void putTimes(int times) {
         System.out.println(times + "개를 구매했습니다.");
     }
 
-    public void printLottos(Lottos lottos) {
-        lottos.getLottos().forEach(lotto -> System.out.println(lotto.toString()));
+    public void printLottos(LottoGroup lottoGroup) {
+        List<Lotto> lottoList = lottoGroup.getLottoGroup();
+        lottoList.stream().forEach(this::printLotto);
         System.out.println();
+    }
+
+    private void printLotto(Lotto lotto) {
+        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        String lottoNumberString = lottoNumbers
+                .stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                .collect(Collectors.joining(LottoConstant.LOTTO_NUMBER_DELIMITER));
+        System.out.println("[" + lottoNumberString + "]");
     }
 
     public void printResult(LottoResult lottoResult) {

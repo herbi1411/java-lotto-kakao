@@ -10,7 +10,6 @@ public class LottoScore {
         if (matchNumber < 0 || matchNumber > 6 || (matchNumber == 6 && isMatchBonus)) {
             throw new IllegalArgumentException();
         }
-
         this.matchNumber = matchNumber;
         this.isMatchBonus = isMatchBonus;
     }

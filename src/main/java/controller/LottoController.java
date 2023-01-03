@@ -1,15 +1,14 @@
 package controller;
 
-import model.LottoResult;
-import model.Lottos;
-import model.RandomNumbers;
-import model.WinningLotto;
+import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
+
+    private LottoService lottoService;
 
 
     public LottoController() {
@@ -19,25 +18,24 @@ public class LottoController {
 
     public void run() {
         long money = inputView.inputMoney();
-        Lottos lottos = new Lottos(new RandomNumbers());
+        lottoService = new LottoService(money);
 
-        int times = lottos.calcTimes(money);
+        int times = lottoService.getTimes();
         outputView.putTimes(times);
 
         if (times < 1) {
             return;
         }
 
-        lottos.generate(times);
-        outputView.printLottos(lottos);
+        outputView.printLottos(lottoService.getLottoGroup());
 
         String lottoString = inputView.getLottoString();
-        int bonus = inputView.getBonus();
+        int bonusNumber = inputView.getBonus();
 
-        WinningLotto winningLotto = new WinningLotto(lottoString, bonus);
-        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+        lottoService.createWinningLotto(lottoString, bonusNumber);
+        lottoService.generateLottoResult();
 
-        outputView.printResult(lottoResult);
-        outputView.printEarningRate(lottoResult.getEarningRate(money));
+        outputView.printResult(lottoService.gerLottoResult());
+        outputView.printEarningRate(lottoService.getEarningRate());
     }
 }
