@@ -9,6 +9,10 @@ public class WinningLotto {
     private final Integer bonusNumber;
 
     public WinningLotto(String lottoString, int bonusNumber) {
+        if (lottoString == null || lottoString.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
         this.lottoNumbers = Stream.of(lottoString.split(", "))
                 .mapToInt(Integer::parseInt)
                 .boxed()
