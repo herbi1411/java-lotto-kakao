@@ -8,6 +8,8 @@ public class Lottos {
     private final RandomNumbers randomNumbers;
     private List<Lotto> lottoList;
 
+    private static final int LOTTO_COST = 1000;
+
     public Lottos(RandomNumbers randomNumbers) {
         this.randomNumbers = randomNumbers;
     }
@@ -20,6 +22,10 @@ public class Lottos {
     }
     public List<Lotto> getLottos() {
         return this.lottoList;
+    }
+
+    public int calcTimes(Long money){
+        return (int)(money / LOTTO_COST);
     }
 
     @Override
