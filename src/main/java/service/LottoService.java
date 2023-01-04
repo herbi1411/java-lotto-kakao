@@ -10,7 +10,7 @@ import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class LottoService {
     private final long money;
-    private final int times;
+    private final long times;
     private final LottoGroup lottoGroup;
     private WinningLottoSet winningLottoSet;
 
@@ -18,11 +18,11 @@ public class LottoService {
 
     public LottoService(long money) {
         this.money = money;
-        this.times = (int) (money / LOTTO_TICKET_PRICE);
+        this.times = money / LOTTO_TICKET_PRICE;
         this.lottoGroup = new LottoGroup(this.times);
     }
 
-    public int getTimes() {
+    public long getTimes() {
         return this.times;
     }
 

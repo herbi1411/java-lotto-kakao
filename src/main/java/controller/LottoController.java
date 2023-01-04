@@ -20,7 +20,7 @@ public class LottoController {
         long money = inputView.inputMoney();
         lottoService = new LottoService(money);
 
-        int times = lottoService.getTimes();
+        long times = lottoService.getTimes();
         outputView.putTimes(times);
 
         if (times < 1) {

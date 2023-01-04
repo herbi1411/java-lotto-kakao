@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void putTimes(int times) {
+    public void putTimes(long times) {
         System.out.println(times + "개를 구매했습니다.");
     }
 

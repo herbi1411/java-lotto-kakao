@@ -9,13 +9,13 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public Long inputMoney() {
+    public long inputMoney() {
         System.out.println("구매금액을 입력해 주세요.");
         return Long.parseLong(scanner.nextLine());
     }
 
     public String getLottoString() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("지난 주 당첨 번호를 입Ï력해 주세요.");
         return scanner.nextLine();
     }
 

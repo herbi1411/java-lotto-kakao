@@ -15,7 +15,7 @@ public class LottoGroupTest {
     @Test
     @DisplayName("지정한 횟수만큼 로또 객체를 배열로 생성한다.")
     void lottoGroupLengthTest() {
-        LottoGroup lottoGroup = new LottoGroup(10);
+        LottoGroup lottoGroup = new LottoGroup(10L);
         List<Lotto> lottoList = lottoGroup.getLottoGroup();
         assertThat(lottoList.size()).isEqualTo(10);
     }

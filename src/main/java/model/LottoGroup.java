@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoGroup {
     private final List<Lotto> lottoGroup;
 
-    public LottoGroup(int repeat) {
+    public LottoGroup(long repeat) {
         this.lottoGroup = new ArrayList<>();
         for (int i = 0; i < repeat; i++) {
             lottoGroup.add(new Lotto());
