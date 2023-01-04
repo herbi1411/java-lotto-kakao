@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     private List<Integer> generateLottoIntegerList() {
-        List<Integer> temp =  IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+        List<Integer> temp = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(temp);

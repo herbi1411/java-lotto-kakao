@@ -18,9 +18,9 @@ public class LottoResult {
 
     private long getTotalPrize() {
         return lottoGroup.getLottoGroup()
-                        .stream()
-                        .mapToLong(lotto -> lottoPrize.getPrize(winningLotto.getScore(lotto)))
-                        .sum();
+                .stream()
+                .mapToLong(lotto -> lottoPrize.getPrize(winningLotto.getScore(lotto)))
+                .sum();
     }
 
     public double getEarningRate() {

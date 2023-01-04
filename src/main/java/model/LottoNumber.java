@@ -6,7 +6,7 @@ import exception.LottoExceptionCode;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
@@ -24,8 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         int otherNumber = o.getNumber();
         if (this.number > otherNumber) {
             return 1;
-        }
-        else if (this.number < otherNumber) {
+        } else if (this.number < otherNumber) {
             return -1;
         }
         return 0;

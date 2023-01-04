@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoPrizeTest {
     @ParameterizedTest
     @MethodSource("generatePrizeData")
-    @DisplayName("로또 점수에 따른 올바른 로또 상금 반환")
+    @DisplayName("로또 점수에 따른 올바른 로또 상금을 반환한다.")
     void prizeTest(LottoScore lottoScore, Long expectedPrize) {
         LottoPrize lottoPrize = new LottoPrize();
         Long prize = lottoPrize.getPrize(lottoScore);
@@ -40,6 +40,7 @@ public class LottoPrizeTest {
 
     @ParameterizedTest
     @MethodSource("generateFormatPrizesData")
+    @DisplayName("정해진 스코어의 올바른 상금 내역 문자열을 출력한다.")
     void formatPrizesTest(List<LottoScore> lottoScore, String expected) {
         LottoPrize lottoPrize = new LottoPrize();
         String result = lottoPrize.formatPrizes(lottoScore);

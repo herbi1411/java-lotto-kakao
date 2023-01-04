@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import static constant.LottoConstant.*;
+
 public class LottoPrize {
     private static final LinkedHashMap<LottoScore, Long> prize = new LinkedHashMap<>() {{
-        put(new LottoScore(3, false), 5000L);
-        put(new LottoScore(4, false), 50_000L);
-        put(new LottoScore(5, false), 1_500_000L);
-        put(new LottoScore(5, true), 30_000_000L);
-        put(new LottoScore(6, false), 2_000_000_000L);
+        put(new LottoScore(3, false), LOTTO_5TH_PRIZE);
+        put(new LottoScore(4, false), LOTTO_4TH_PRIZE);
+        put(new LottoScore(5, false), LOTTO_3RD_PRIZE);
+        put(new LottoScore(5, true), LOTTO_2ND_PRIZE);
+        put(new LottoScore(6, false), LOTTO_1ST_PRIZE);
     }};
 
     private String formatPrize(LottoScore lottoScore) {

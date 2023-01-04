@@ -4,7 +4,6 @@ import model.LottoGroup;
 import model.LottoResult;
 import model.WinningLotto;
 
-
 import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class LottoService {
@@ -17,7 +16,7 @@ public class LottoService {
 
     public LottoService(long money) {
         this.money = money;
-        this.times = (int)(money / LOTTO_TICKET_PRICE);
+        this.times = (int) (money / LOTTO_TICKET_PRICE);
         this.lottoGroup = new LottoGroup(this.times);
     }
 

@@ -18,9 +18,11 @@ public class LottoGroup {
     public LottoGroup(List<Lotto> lottoGroup) {
         this.lottoGroup = lottoGroup;
     }
+
     public List<Lotto> getLottoGroup() {
         return Collections.unmodifiableList(this.lottoGroup);
     }
+
     @Override
     public String toString() {
         return lottoGroup.stream().map(Lotto::toString).collect(Collectors.joining("\n"));

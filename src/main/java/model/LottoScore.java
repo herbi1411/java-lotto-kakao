@@ -1,14 +1,19 @@
 package model;
 
+import exception.LottoException;
+import exception.LottoExceptionCode;
+
 import java.util.Objects;
+
+import static constant.LottoConstant.LOTTO_COUNT;
 
 public class LottoScore {
     private final int matchNumber;
     private final boolean isMatchBonus;
 
     public LottoScore(int matchNumber, boolean isMatchBonus) {
-        if (matchNumber < 0 || matchNumber > 6 || (matchNumber == 6 && isMatchBonus)) {
-            throw new IllegalArgumentException();
+        if (matchNumber < 0 || matchNumber > LOTTO_COUNT || (matchNumber == LOTTO_COUNT && isMatchBonus)) {
+            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_MATCH_NUMBER);
         }
         this.matchNumber = matchNumber;
         this.isMatchBonus = isMatchBonus;
