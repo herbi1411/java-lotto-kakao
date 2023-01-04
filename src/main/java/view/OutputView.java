@@ -5,6 +5,7 @@ import model.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -19,7 +20,7 @@ public class OutputView {
     }
 
     private void printLotto(Lotto lotto) {
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         String lottoNumberString = lottoNumbers
                 .stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
@@ -37,15 +38,10 @@ public class OutputView {
         System.out.printf("4개 일치 (50,000원) - %d개%n", lottoPrizeMap.get(LottoPrize.PRIZE_FOURTH));
         System.out.printf("5개 일치 (1,500,000원) - %d개%n", lottoPrizeMap.get(LottoPrize.PRIZE_THIRD));
         System.out.printf("5개 일치, 보너스 볼 일치(30,000,000원) - %d개%n", lottoPrizeMap.get(LottoPrize.PRIZE_SECOND));
-        System.out.printf("6개 일치 (20,00,000,,000원) - %d개%n", lottoPrizeMap.get(LottoPrize.PRIZE_FIRST));
+        System.out.printf("6개 일치 (2,000,000,000원) - %d개%n", lottoPrizeMap.get(LottoPrize.PRIZE_FIRST));
     }
 
     public void printEarningRate(double earningRate) {
         System.out.printf("총 수익률은 %.2f입니다.\n", earningRate);
-        if (earningRate < 1.0) {
-            System.out.println("손해!");
-            return;
-        }
-        System.out.println("이득!");
     }
 }

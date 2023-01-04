@@ -6,6 +6,7 @@ import exception.LottoExceptionCode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -13,7 +14,7 @@ import java.util.stream.Stream;
 import static constant.LottoConstant.*;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
     private static final List<Integer> possibleLottoNumberList = generatePossibleLottoNumberList();
 
     public Lotto() {
@@ -42,11 +43,11 @@ public class Lotto {
         return possibleLottoNumberList.subList(0, LOTTO_COUNT);
     }
 
-    private List<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> LottoIntegerList) {
+    private Set<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> LottoIntegerList) {
         return LottoIntegerList.stream()
                 .sorted()
                 .map(LottoNumber::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private void validateLottoLength(List<Integer> lottoIntegerList) {
@@ -68,8 +69,8 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override

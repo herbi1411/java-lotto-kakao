@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningLottoSet {
 
@@ -14,7 +14,7 @@ public class WinningLottoSet {
     }
 
     public LottoScore getScore(Lotto lotto) {
-        List<LottoNumber> winningLottoNumbers = winningLotto.getNumbers();
+        Set<LottoNumber> winningLottoNumbers = winningLotto.getNumbers();
         int matchNumber = (int) lotto.getNumbers()
                 .stream()
                 .filter(winningLottoNumbers::contains)
