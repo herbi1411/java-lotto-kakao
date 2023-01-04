@@ -13,9 +13,10 @@ import static constant.LottoConstant.*;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
+    private static final List<Integer> possibleLottoNumberList = generatePossibleLottoNumberList();
 
     public Lotto() {
-        this.lottoNumbers = convertIntegerListToLottoNumberList(generateLottoIntegerList());
+        this.lottoNumbers = convertIntegerListToLottoNumberList(getLottoIntegerList());
     }
 
     public Lotto(List<Integer> lottoIntegerList) {
@@ -25,20 +26,22 @@ public class Lotto {
         this.lottoNumbers = convertIntegerListToLottoNumberList(lottoIntegerList);
     }
 
-    private List<Integer> generateLottoIntegerList() {
-        List<Integer> temp = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-        Collections.shuffle(temp);
-        return temp.subList(0, LOTTO_COUNT);
+    private List<Integer> getLottoIntegerList() {
+        Collections.shuffle(possibleLottoNumberList);
+        return possibleLottoNumberList.subList(0, LOTTO_COUNT);
     }
 
-    private List<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> integerList) {
-        List<LottoNumber> lottoNumberList = integerList.stream()
-                .map(LottoNumber::new)
+    private List<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> LottoIntegerList) {
+        return LottoIntegerList.stream()
+                .sorted()
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        Collections.sort(lottoNumberList);
-        return lottoNumberList;
+    }
+
+    private static List<Integer> generatePossibleLottoNumberList() {
+        return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumber> getNumbers() {

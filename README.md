@@ -1,48 +1,53 @@
 # java-lotto-kakao
 
 ## 기능 요구사항
+
 * 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 * 로또 1장의 가격은 1000원이다.
 * 로또 번호는 1 ~ 45까지이다.
 
 ## 상세 기능목록
+
 - [x] 구입금액을 입력해서 몇개를 구매했는지 알려준다.
-  - [x] 구입금액을 입력
-  - [x] 구매 가능한 개수 계산
-  - [x] 개수 출력
+    - [x] 구입금액을 입력
+    - [x] 구매 가능한 개수 계산
+    - [x] 개수 출력
 - [x] 구매횟수만큼 6개의 랜덤 숫자를 만들어준다.
-  - [x] 1 ~ 45까지 리스트 만들어서 셔플후 6개의 숫자를 추출한다.
-  - [x] 구매횟수만큼 반복한다.
-  - [x] 만들어진 숫자를 출력한다.
+    - [x] 1 ~ 45까지 리스트 만들어서 셔플후 6개의 숫자를 추출한다.
+    - [x] 구매횟수만큼 반복한다.
+    - [x] 만들어진 숫자를 출력한다.
 - [x] 지난주 당첨번호와 보너스볼 숫자를 입력받는다.
 - [x] 당첨 통계를 출력한다.
-  - [x] 구매한 리스트와 당첨번호를 비교한다.
-  - [x] 일치하는 개수를 추출한다. (3개, 4개, 5개, 5.5개, 6개)
-  - [x] 수익률을 계산한다.
-  - [x] 결과를 출력한다.
+    - [x] 구매한 리스트와 당첨번호를 비교한다.
+    - [x] 일치하는 개수를 추출한다. (3개, 4개, 5개, 5.5개, 6개)
+    - [x] 수익률을 계산한다.
+    - [x] 결과를 출력한다.
 
 ## 구조
+
 * Model
-  * LottoNumber: 로또의 각 숫자(1 ~ 45)
-  * Lotto: 로또 객체 (6개의 LottoNumber로 구성)
-  * LottoGroup: 로또 객체 리스트의 일급컬렉션
-  * LottoScore: 당첨 번호와 일치하는 숫자 갯수 + 보너스볼 일치 여부를 가지는 점수 개체
-  * LottoPrize: 등수별 로또 상금의 정보를 HashMap으로 저장
-  * LottoResult: 생성된 LottoGroup의 당첨 정보
-  * WinningLotto: 지난주 당첨 번호 정보
+    * LottoNumber: 로또의 각 숫자(1 ~ 45)
+    * Lotto: 로또 객체 (6개의 LottoNumber로 구성)
+    * LottoGroup: 로또 객체 리스트의 일급컬렉션
+    * LottoScore: 당첨 번호와 일치하는 숫자 갯수 + 보너스볼 일치 여부를 가지는 점수 개체
+    * LottoPrize: 등수별 로또 상금의 정보를 HashMap으로 저장
+    * LottoResult: 생성된 LottoGroup의 당첨 정보
+    * WinningLotto: 지난주 당첨 번호 정보
 * Controller
-  * LottoController: 게임 진행
+    * LottoController: 게임 진행
 * View
-  * InputView : 프로그램 입력 로직
-  * OutputView : 프로그램 출력 로직
+    * InputView : 프로그램 입력 로직
+    * OutputView : 프로그램 출력 로직
 * service
-  * LottoService: 비즈니스 로직
+    * LottoService: 비즈니스 로직
 * constant
-  * LottoConstant: 사용되는 상수 정보 전역 저장(로또 숫자 범위, 숫자 개수 등)
+    * LottoConstant: 사용되는 상수 정보 전역 저장(로또 숫자 범위, 숫자 개수 등)
 * exception
-  * LottoException: 프로그램에서 발생하는 예외
-  * LottoExceptionCode: 예외 메시지들을 저장할 공용체
+    * LottoException: 프로그램에서 발생하는 예외
+    * LottoExceptionCode: 예외 메시지들을 저장할 공용체
+
 ## Expected Output
+
 ```
 구입금액을 입력해 주세요.
 14000

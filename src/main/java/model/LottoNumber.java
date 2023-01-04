@@ -4,34 +4,40 @@ import constant.LottoConstant;
 import exception.LottoException;
 import exception.LottoExceptionCode;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+import static constant.LottoConstant.LOTTO_MAX_NUMBER;
+import static constant.LottoConstant.LOTTO_MIN_NUMBER;
+
+public class LottoNumber {
+    private static final Map<Integer, LottoNumber> cachedLottoNumberMap = new HashMap<>();
     private final int number;
 
-    public LottoNumber(int number) {
+    static {
+        IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                .forEach(number -> cachedLottoNumberMap.put(number, new LottoNumber(number)));
+    }
+
+    private LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
 
-    private void validateNumber(int number) {
+    public static LottoNumber of(int number) {
+        validateNumber(number);
+        return cachedLottoNumberMap.get(number);
+    }
+
+    private static void validateNumber(int number) {
         if (number < LottoConstant.LOTTO_MIN_NUMBER || number > LottoConstant.LOTTO_MAX_NUMBER)
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER);
     }
 
-    @Override
-    public int compareTo(LottoNumber o) {
-        int otherNumber = o.getNumber();
-        if (this.number > otherNumber) {
-            return 1;
-        } else if (this.number < otherNumber) {
-            return -1;
-        }
-        return 0;
-    }
-
     public int getNumber() {
-        return number;
+        return this.number;
     }
 
     @Override
