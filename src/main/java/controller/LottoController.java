@@ -1,5 +1,6 @@
 package controller;
 
+import model.Money;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -17,7 +18,7 @@ public class LottoController {
     }
 
     public void run() {
-        long money = inputView.inputMoney();
+        Money money = new Money(inputView.inputMoney());
         lottoService = new LottoService(money);
 
         long times = lottoService.getTimes();

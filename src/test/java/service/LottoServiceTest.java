@@ -1,5 +1,6 @@
 package service;
 
+import model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,7 +15,7 @@ public class LottoServiceTest {
     @ParameterizedTest
     @MethodSource("getLottoGroupSizeTestData")
     @DisplayName("금액에 대해 알맞은 로또 구매 갯수를 추출한다.")
-    void lottoGroupSizeTest(long money, int expectedTimes) {
+    void lottoGroupSizeTest(Money money, int expectedTimes) {
         LottoService lottoService = new LottoService(money);
         long times = lottoService.getTimes();
         assertThat(times).isEqualTo(expectedTimes);
@@ -22,9 +23,9 @@ public class LottoServiceTest {
 
     static Stream<Arguments> getLottoGroupSizeTestData() {
         return Stream.of(
-                Arguments.of(1000L, 1),
-                Arguments.of(2345L, 2),
-                Arguments.of(5500L, 5)
+                Arguments.of(new Money(1000L), 1),
+                Arguments.of(new Money(2345L), 2),
+                Arguments.of(new Money(5500L), 5)
         );
     }
 }

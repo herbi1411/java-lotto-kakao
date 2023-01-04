@@ -1,24 +1,20 @@
 package service;
 
-import model.Lotto;
-import model.LottoGroup;
-import model.LottoResult;
-import model.WinningLottoSet;
+import model.*;
 
 import static constant.LottoConstant.LOTTO_NUMBER_DELIMITER;
 import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class LottoService {
-    private final long money;
+    private final Money money;
     private final long times;
     private final LottoGroup lottoGroup;
     private WinningLottoSet winningLottoSet;
-
     private LottoResult lottoResult;
 
-    public LottoService(long money) {
+    public LottoService(Money money) {
         this.money = money;
-        this.times = money / LOTTO_TICKET_PRICE;
+        this.times = money.getMoney() / LOTTO_TICKET_PRICE;
         this.lottoGroup = new LottoGroup(this.times);
     }
 

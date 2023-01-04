@@ -10,14 +10,14 @@ public class LottoResult {
     private final Map<LottoPrize, Long> lottoPrizeMap;
     private final double earningRate;
 
-    public LottoResult(LottoGroup lottoGroup, WinningLottoSet winningLotto, long money) {
+    public LottoResult(LottoGroup lottoGroup, WinningLottoSet winningLotto, Money money) {
         this.lottoGroup = lottoGroup;
         this.winningLotto = winningLotto;
 
         this.lottoPrizeMap = generateInitialLottoPrizeMap();
         setLottoPrizeMap();
 
-        this.earningRate = (double) getTotalPrize() / money;
+        this.earningRate = (double) getTotalPrize() / money.getMoney();
     }
 
     private void setLottoPrizeMap() {
