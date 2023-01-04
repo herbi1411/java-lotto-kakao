@@ -1,16 +1,18 @@
 package service;
 
+import model.Lotto;
 import model.LottoGroup;
 import model.LottoResult;
-import model.WinningLotto;
+import model.WinningLottoSet;
 
+import static constant.LottoConstant.LOTTO_NUMBER_DELIMITER;
 import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class LottoService {
     private final long money;
     private final int times;
     private final LottoGroup lottoGroup;
-    private WinningLotto winningLotto;
+    private WinningLottoSet winningLottoSet;
 
     private LottoResult lottoResult;
 
@@ -29,11 +31,12 @@ public class LottoService {
     }
 
     public void createWinningLotto(String lottoString, int bonusNumber) {
-        this.winningLotto = new WinningLotto(lottoString, bonusNumber);
+        Lotto winningLotto = new Lotto(lottoString, LOTTO_NUMBER_DELIMITER);
+        this.winningLottoSet = new WinningLottoSet(winningLotto, bonusNumber);
     }
 
     public void generateLottoResult() {
-        this.lottoResult = new LottoResult(lottoGroup, winningLotto, money);
+        this.lottoResult = new LottoResult(lottoGroup, winningLottoSet, money);
     }
 
     public Double getEarningRate() {

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static constant.LottoConstant.*;
 
@@ -20,9 +21,19 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> lottoIntegerList) {
-        if (lottoIntegerList.size() != LOTTO_COUNT) {
-            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_LENGTH);
-        }
+        validateLottoLength(lottoIntegerList);
+        this.lottoNumbers = convertIntegerListToLottoNumberList(lottoIntegerList);
+    }
+
+    public Lotto(String lottoString, String delimiter) {
+        validateLottoString(lottoString);
+        String[] parsedLottoString = lottoString.split(delimiter);
+        List<Integer> lottoIntegerList = Stream.of(parsedLottoString)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
+
+        validateLottoLength(lottoIntegerList);
         this.lottoNumbers = convertIntegerListToLottoNumberList(lottoIntegerList);
     }
 
@@ -37,6 +48,19 @@ public class Lotto {
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
+
+    private void validateLottoLength(List<Integer> lottoIntegerList) {
+        if (lottoIntegerList.size() != LOTTO_COUNT) {
+            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_LENGTH);
+        }
+    }
+
+    private void validateLottoString(String lottoString) {
+        if (lottoString == null) {
+            throw new LottoException(LottoExceptionCode.ILLEGAL_ARGUMENT_LOTTO_STRING);
+        }
+    }
+
 
     private static List<Integer> generatePossibleLottoNumberList() {
         return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)

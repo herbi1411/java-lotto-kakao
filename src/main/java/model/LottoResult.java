@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
     private final LottoGroup lottoGroup;
-    private final WinningLotto winningLotto;
+    private final WinningLottoSet winningLotto;
     private final LottoPrize lottoPrize;
     private final double earningRate;
 
-    public LottoResult(LottoGroup lottoGroup, WinningLotto winningLotto, long money) {
+    public LottoResult(LottoGroup lottoGroup, WinningLottoSet winningLotto, long money) {
         this.lottoPrize = new LottoPrize();
         this.lottoGroup = lottoGroup;
         this.winningLotto = winningLotto;

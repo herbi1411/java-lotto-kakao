@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static constant.LottoConstant.LOTTO_NUMBER_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
@@ -15,7 +16,7 @@ public class WinningLottoTest {
     @MethodSource("getGetScoreMethodTestData")
     @DisplayName("지난 주 당첨번호와 로또 번호를 비교해 올바른 결과값 객체를 생성한다.")
     void getScoreMethodTest(String lottoString, int bonusNumber, Lotto lotto, LottoScore expected) {
-        WinningLotto winningLotto = new WinningLotto(lottoString, bonusNumber);
+        WinningLottoSet winningLotto = new WinningLottoSet(new Lotto(lottoString, LOTTO_NUMBER_DELIMITER), bonusNumber);
         LottoScore result = winningLotto.getScore(lotto);
         assertThat(result).isEqualTo(expected);
     }
