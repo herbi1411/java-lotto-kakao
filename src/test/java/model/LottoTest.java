@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
     @RepeatedTest(100)
     @DisplayName("로또를 생성했을 때 정해진 길이만큼 로또가 생성된다.")
-    void generateNumbersTest() {
+    void lottoGenerateTest() {
         Lotto lotto = new Lotto();
         List<LottoNumber> generatedNumbers = lotto.getNumbers();
         assertThat(generatedNumbers.size()).isEqualTo(LottoConstant.LOTTO_COUNT);

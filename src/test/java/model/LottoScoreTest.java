@@ -15,15 +15,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoScoreTest {
 
     @ParameterizedTest
-    @MethodSource("generateWrongScoreData")
+    @MethodSource("getInvalidScoreExceptionTestData")
     @DisplayName("생성될 수 없는 로또 점수가 생성되면 예외를 발생시킨다.")
-    void wrongScoreTest(int matchNumber, boolean isMatchBonus) {
+    void InvalidScoreExceptionTest(int matchNumber, boolean isMatchBonus) {
         assertThatThrownBy(() -> new LottoScore(matchNumber, isMatchBonus))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(INVALID_LOTTO_MATCH_NUMBER.getErrorMessage());
     }
 
-    static Stream<Arguments> generateWrongScoreData() {
+    static Stream<Arguments> getInvalidScoreExceptionTestData() {
         return Stream.of(
                 Arguments.of(-1, true),
                 Arguments.of(6, true),
@@ -33,13 +33,13 @@ public class LottoScoreTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateCompareData")
+    @MethodSource("getLottoScoreIdentityTestData")
     @DisplayName("동일한 로또 점수를 비교할때 비교결과로 true를 반환한다. (일치 개수가 5일 때만 보너스 숫자 일치 여부 판단)")
-    void compareTest(LottoScore lottoScore, LottoScore that, boolean expected) {
+    void lottoScoreIdentityTest(LottoScore lottoScore, LottoScore that, boolean expected) {
         assertThat(lottoScore.compare(that)).isEqualTo(expected);
     }
 
-    static Stream<Arguments> generateCompareData() {
+    static Stream<Arguments> getLottoScoreIdentityTestData() {
         return Stream.of(
                 Arguments.of(
                         new LottoScore(3, false),

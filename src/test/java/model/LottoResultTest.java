@@ -13,15 +13,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     @ParameterizedTest
-    @MethodSource("generateLottoResults")
+    @MethodSource("getEarningRateTestData")
     @DisplayName("로또 당첨에 따른 올바른 수익률을 계산한다.")
-    void lottoResultTest(List<Lotto> lottosList, WinningLotto winningLotto, int times, double expectedEarningRate) {
+    void earningRateTest(List<Lotto> lottosList, WinningLotto winningLotto, int times, double expectedEarningRate) {
         LottoGroup lottoGroup = new LottoGroup(lottosList);
         LottoResult lottoResult = new LottoResult(lottoGroup, winningLotto, (long) times * LOTTO_TICKET_PRICE);
         assertThat(lottoResult.getEarningRate()).isEqualTo(expectedEarningRate);
     }
 
-    static Stream<Arguments> generateLottoResults() {
+    static Stream<Arguments> getEarningRateTestData() {
         return Stream.of(
                 Arguments.of(
                         List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(7, 8, 9, 10, 11, 12))),

@@ -14,9 +14,9 @@ public class OutputView {
         System.out.println(times + "개를 구매했습니다.");
     }
 
-    public void printLottos(LottoGroup lottoGroup) {
+    public void printLottoGroup(LottoGroup lottoGroup) {
         List<Lotto> lottoList = lottoGroup.getLottoGroup();
-        lottoList.stream().forEach(this::printLotto);
+        lottoList.forEach(this::printLotto);
         System.out.println();
     }
 

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoServiceTest {
 
     @ParameterizedTest
-    @MethodSource("generateTimesData")
+    @MethodSource("getLottoGroupSizeTestData")
     @DisplayName("금액에 대해 알맞은 로또 구매 갯수를 추출한다.")
     void lottoGroupSizeTest(long money, int expectedTimes) {
         LottoService lottoService = new LottoService(money);
@@ -20,7 +20,7 @@ public class LottoServiceTest {
         assertThat(times).isEqualTo(expectedTimes);
     }
 
-    static Stream<Arguments> generateTimesData() {
+    static Stream<Arguments> getLottoGroupSizeTestData() {
         return Stream.of(
                 Arguments.of(1000L, 1),
                 Arguments.of(2345L, 2),

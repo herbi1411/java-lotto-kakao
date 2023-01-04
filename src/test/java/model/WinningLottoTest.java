@@ -12,15 +12,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
     @ParameterizedTest
-    @MethodSource("generateLottoScoreData")
+    @MethodSource("getGetScoreMethodTestData")
     @DisplayName("지난 주 당첨번호와 로또 번호를 비교해 올바른 결과값 객체를 생성한다.")
-    void lottoScoreTest(String lottoString, int bonusNumber, Lotto lotto, LottoScore expected) {
+    void getScoreMethodTest(String lottoString, int bonusNumber, Lotto lotto, LottoScore expected) {
         WinningLotto winningLotto = new WinningLotto(lottoString, bonusNumber);
         LottoScore result = winningLotto.getScore(lotto);
         assertThat(result).isEqualTo(expected);
     }
 
-    static Stream<Arguments> generateLottoScoreData() {
+    static Stream<Arguments> getGetScoreMethodTestData() {
         return Stream.of(
                 Arguments.of("1, 2, 3, 4, 5, 6", 7, new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoScore(6, false)),
                 Arguments.of("1, 2, 3, 4, 5, 6", 7, new Lotto(List.of(1, 2, 3, 4, 6, 7)), new LottoScore(5, true)),

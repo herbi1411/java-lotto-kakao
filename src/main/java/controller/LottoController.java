@@ -27,7 +27,7 @@ public class LottoController {
             return;
         }
 
-        outputView.printLottos(lottoService.getLottoGroup());
+        outputView.printLottoGroup(lottoService.getLottoGroup());
 
         String lottoString = inputView.getLottoString();
         int bonusNumber = inputView.getBonus();
