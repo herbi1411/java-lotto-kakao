@@ -1,37 +1,54 @@
 package model;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class LottoResult {
     private final LottoGroup lottoGroup;
     private final WinningLottoSet winningLotto;
-    private final LottoPrize lottoPrize;
+    private final Map<LottoPrize, Long> lottoPrizeMap;
     private final double earningRate;
 
     public LottoResult(LottoGroup lottoGroup, WinningLottoSet winningLotto, long money) {
-        this.lottoPrize = new LottoPrize();
         this.lottoGroup = lottoGroup;
         this.winningLotto = winningLotto;
+
+        this.lottoPrizeMap = generateInitialLottoPrizeMap();
+        setLottoPrizeMap();
+
         this.earningRate = (double) getTotalPrize() / money;
     }
 
-    private long getTotalPrize() {
-        return lottoGroup.getLottoGroup()
+    private void setLottoPrizeMap() {
+        lottoGroup.getLottoGroup()
                 .stream()
-                .mapToLong(lotto -> lottoPrize.getPrize(winningLotto.getScore(lotto)))
-                .sum();
+                .map(winningLotto::getScore)
+                .map(lottoScore -> LottoPrize.valueOf(lottoScore.getMatchNumber(), lottoScore.isMatchBonus()))
+                .forEach(lottoPrize -> lottoPrizeMap.put(lottoPrize, lottoPrizeMap.get(lottoPrize) + 1));
+    }
+
+    private Map<LottoPrize, Long> generateInitialLottoPrizeMap() {
+        LinkedHashMap<LottoPrize, Long> result = new LinkedHashMap<>();
+        for (LottoPrize lottoPrize : LottoPrize.values()) {
+            result.put(lottoPrize, 0L);
+        }
+        return result;
+    }
+
+    private long getTotalPrize() {
+        long totalPrize = 0L;
+        for (LottoPrize lottoPrize : lottoPrizeMap.keySet()) {
+            totalPrize += lottoPrize.getPrizeAmount() * lottoPrizeMap.get(lottoPrize);
+        }
+        return totalPrize;
     }
 
     public double getEarningRate() {
         return this.earningRate;
     }
 
-    private List<LottoScore> getLottoScores() {
-        return lottoGroup.getLottoGroup().stream().map(winningLotto::getScore).collect(Collectors.toList());
-    }
-
-    public String getResult() {
-        return this.lottoPrize.formatPrizes(getLottoScores());
+    public Map<LottoPrize, Long> getLottoPrizeMap() {
+        return Collections.unmodifiableMap(this.lottoPrizeMap);
     }
 }

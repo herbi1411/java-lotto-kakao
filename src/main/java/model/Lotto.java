@@ -45,7 +45,7 @@ public class Lotto {
     private List<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> LottoIntegerList) {
         return LottoIntegerList.stream()
                 .sorted()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

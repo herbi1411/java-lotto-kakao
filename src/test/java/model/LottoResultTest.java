@@ -27,25 +27,25 @@ public class LottoResultTest {
                         List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(7, 8, 9, 10, 11, 12))),
                         new WinningLottoSet(new Lotto("1, 2, 3, 4, 5, 6", LOTTO_NUMBER_DELIMITER), 7),
                         2,
-                        (double) (LOTTO_1ST_PRIZE) / (LOTTO_TICKET_PRICE * 2)
+                        (double) (LOTTO_FIRST_PRIZE_AMOUNT) / (LOTTO_TICKET_PRICE * 2)
                 ), // 6개 일치
                 Arguments.of(
                         List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(1, 2, 3, 4, 5, 6))),
                         new WinningLottoSet(new Lotto("1, 2, 3, 4, 5, 6", LOTTO_NUMBER_DELIMITER), 7),
                         2,
-                        (double) (LOTTO_1ST_PRIZE + LOTTO_1ST_PRIZE) / (LOTTO_TICKET_PRICE * 2)
+                        (double) (LOTTO_FIRST_PRIZE_AMOUNT + LOTTO_FIRST_PRIZE_AMOUNT) / (LOTTO_TICKET_PRICE * 2)
                 ), // 6개 일치 + 6개 일치
                 Arguments.of(
                         List.of(new Lotto(List.of(5, 4, 3, 2, 1, 9)), new Lotto(List.of(3, 5, 6, 7, 2, 4))),
                         new WinningLottoSet(new Lotto("1, 2, 3, 4, 5, 6", LOTTO_NUMBER_DELIMITER), 7),
                         2,
-                        (double) (LOTTO_3RD_PRIZE + LOTTO_2ND_PRIZE) / (LOTTO_TICKET_PRICE * 2)
+                        (double) (LOTTO_THIRD_PRIZE_AMOUNT + LOTTO_SECOND_PRIZE_AMOUNT) / (LOTTO_TICKET_PRICE * 2)
                 ), // 5개 일치 + 5개 일치, 보너스 일치
                 Arguments.of(
                         List.of(new Lotto(List.of(1, 2, 3, 34, 35, 36)), new Lotto(List.of(1, 2, 3, 4, 35, 36))),
                         new WinningLottoSet(new Lotto("1, 2, 3, 4, 5, 6", LOTTO_NUMBER_DELIMITER), 7),
                         2,
-                        (double) (LOTTO_5TH_PRIZE + LOTTO_4TH_PRIZE) / (LOTTO_TICKET_PRICE * 2)
+                        (double) (LOTTO_FIFTH_PRIZE_AMOUNT + LOTTO_FOURTH_PRIZE_AMOUNT) / (LOTTO_TICKET_PRICE * 2)
                 ) // 3개 일치, 4개 일치
         );
     }

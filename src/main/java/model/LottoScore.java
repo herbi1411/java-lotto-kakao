@@ -12,11 +12,15 @@ public class LottoScore {
     private final boolean isMatchBonus;
 
     public LottoScore(int matchNumber, boolean isMatchBonus) {
+        validateParams(matchNumber, isMatchBonus);
+        this.matchNumber = matchNumber;
+        this.isMatchBonus = isMatchBonus;
+    }
+
+    private void validateParams(int matchNumber, boolean isMatchBonus) {
         if (matchNumber < 0 || matchNumber > LOTTO_COUNT || (matchNumber == LOTTO_COUNT && isMatchBonus)) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_MATCH_NUMBER);
         }
-        this.matchNumber = matchNumber;
-        this.isMatchBonus = isMatchBonus;
     }
 
     public int getMatchNumber() {
@@ -25,18 +29,6 @@ public class LottoScore {
 
     public boolean isMatchBonus() {
         return isMatchBonus;
-    }
-
-    public boolean compare(LottoScore that) {
-        if (this.matchNumber != that.matchNumber) {
-            return false;
-        }
-
-        if (this.matchNumber != 5) {
-            return true;
-        }
-
-        return this.isMatchBonus == that.isMatchBonus;
     }
 
     @Override
@@ -50,13 +42,5 @@ public class LottoScore {
     @Override
     public int hashCode() {
         return Objects.hash(matchNumber, isMatchBonus);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoScore{" +
-                "matchNumber=" + matchNumber +
-                ", isMatchBonus=" + isMatchBonus +
-                '}';
     }
 }

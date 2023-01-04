@@ -1,41 +1,44 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Arrays;
 
 import static constant.LottoConstant.*;
 
-public class LottoPrize {
-    private static final LinkedHashMap<LottoScore, Long> prize = new LinkedHashMap<>() {{
-        put(new LottoScore(3, false), LOTTO_5TH_PRIZE);
-        put(new LottoScore(4, false), LOTTO_4TH_PRIZE);
-        put(new LottoScore(5, false), LOTTO_3RD_PRIZE);
-        put(new LottoScore(5, true), LOTTO_2ND_PRIZE);
-        put(new LottoScore(6, false), LOTTO_1ST_PRIZE);
-    }};
+public enum LottoPrize {
 
-    private String formatPrize(LottoScore lottoScore) {
-        if (lottoScore.getMatchNumber() == 5 && lottoScore.isMatchBonus()) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - ", lottoScore.getMatchNumber(), getPrize(lottoScore));
+    PRIZE_NOTHING(0, false, 0L),
+    PRIZE_FIFTH(3, false, LOTTO_FIFTH_PRIZE_AMOUNT),
+    PRIZE_FOURTH(4, false, LOTTO_FOURTH_PRIZE_AMOUNT),
+    PRIZE_THIRD(5, false, LOTTO_THIRD_PRIZE_AMOUNT),
+    PRIZE_SECOND(5, true, LOTTO_SECOND_PRIZE_AMOUNT),
+    PRIZE_FIRST(6, true, LOTTO_FIRST_PRIZE_AMOUNT);
+
+    private final int matchNumber;
+    private final long prizeAmount;
+    private final boolean isMatchBonus;
+
+    LottoPrize(int matchNumber, boolean isMatchBonus, long prizeAmount) {
+        this.matchNumber = matchNumber;
+        this.isMatchBonus = isMatchBonus;
+        this.prizeAmount = prizeAmount;
+    }
+
+    public static LottoPrize valueOf(int matchNumber, boolean isMatchBonus) {
+        return Arrays.stream(LottoPrize.values())
+                .filter(l -> l.isValueMatch(matchNumber, isMatchBonus))
+                .findFirst()
+                .orElse(LottoPrize.PRIZE_NOTHING);
+    }
+
+    private boolean isValueMatch(int matchNumber, boolean isMatchBonus) {
+        if (this.matchNumber != matchNumber) {
+            return false;
         }
-        return String.format("%d개 일치 (%d원) - ", lottoScore.getMatchNumber(), getPrize(lottoScore));
+        return matchNumber != 5 || this.isMatchBonus == isMatchBonus;
     }
 
-    public Long getPrize(LottoScore lottoScore) {
-        if (lottoScore.getMatchNumber() == 5) {
-            return prize.getOrDefault(lottoScore, 0L);
-        }
-        return prize.getOrDefault(new LottoScore(lottoScore.getMatchNumber(), false), 0L);
+    public long getPrizeAmount() {
+        return prizeAmount;
     }
 
-    public String formatPrizes(List<LottoScore> lottoScores) {
-        List<String> prizeResults = new ArrayList<>();
-        prize.forEach((lottoScore, prizeMoney) -> {
-            long count = lottoScores.stream().filter(l -> l.compare(lottoScore)).count();
-            prizeResults.add(formatPrize(lottoScore) + count + "개");
-        });
-
-        return String.join("\n", prizeResults);
-    }
 }

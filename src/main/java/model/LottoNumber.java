@@ -26,7 +26,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber from(int number) {
         validateNumber(number);
         return cachedLottoNumberMap.get(number);
     }

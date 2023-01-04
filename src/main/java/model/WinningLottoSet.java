@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class WinningLottoSet {
 
     private final Lotto winningLotto;
@@ -12,9 +14,10 @@ public class WinningLottoSet {
     }
 
     public LottoScore getScore(Lotto lotto) {
+        List<LottoNumber> winningLottoNumbers = winningLotto.getNumbers();
         int matchNumber = (int) lotto.getNumbers()
                 .stream()
-                .filter(number -> winningLotto.getNumbers().contains(number))
+                .filter(winningLottoNumbers::contains)
                 .count();
 
         boolean isMatchBonus = lotto.getNumbers().

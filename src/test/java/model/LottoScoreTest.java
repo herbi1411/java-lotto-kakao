@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static exception.LottoExceptionCode.INVALID_LOTTO_MATCH_NUMBER;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoScoreTest {
@@ -29,43 +28,6 @@ public class LottoScoreTest {
                 Arguments.of(6, true),
                 Arguments.of(7, false),
                 Arguments.of(7, true)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("getLottoScoreIdentityTestData")
-    @DisplayName("동일한 로또 점수를 비교할때 비교결과로 true를 반환한다. (일치 개수가 5일 때만 보너스 숫자 일치 여부 판단)")
-    void lottoScoreIdentityTest(LottoScore lottoScore, LottoScore that, boolean expected) {
-        assertThat(lottoScore.compare(that)).isEqualTo(expected);
-    }
-
-    static Stream<Arguments> getLottoScoreIdentityTestData() {
-        return Stream.of(
-                Arguments.of(
-                        new LottoScore(3, false),
-                        new LottoScore(3, false),
-                        true
-                ),
-                Arguments.of(
-                        new LottoScore(3, false),
-                        new LottoScore(3, true),
-                        true
-                ),
-                Arguments.of(
-                        new LottoScore(4, false),
-                        new LottoScore(4, true),
-                        true
-                ),
-                Arguments.of(
-                        new LottoScore(5, false),
-                        new LottoScore(5, true),
-                        false
-                ),
-                Arguments.of(
-                        new LottoScore(6, false),
-                        new LottoScore(6, false),
-                        true
-                )
         );
     }
 }

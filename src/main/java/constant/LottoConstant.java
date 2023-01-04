@@ -7,11 +7,11 @@ public class LottoConstant {
     public static final int LOTTO_COUNT = 6;
 
     // 로또 상금
-    public static final long LOTTO_1ST_PRIZE = 2_000_000_000L;
-    public static final long LOTTO_2ND_PRIZE = 30_000_000L;
-    public static final long LOTTO_3RD_PRIZE = 1_500_000L;
-    public static final long LOTTO_4TH_PRIZE = 50_000L;
-    public static final long LOTTO_5TH_PRIZE = 5000L;
+    public static final long LOTTO_FIRST_PRIZE_AMOUNT = 2_000_000_000L;
+    public static final long LOTTO_SECOND_PRIZE_AMOUNT = 30_000_000L;
+    public static final long LOTTO_THIRD_PRIZE_AMOUNT = 1_500_000L;
+    public static final long LOTTO_FOURTH_PRIZE_AMOUNT = 50_000L;
+    public static final long LOTTO_FIFTH_PRIZE_AMOUNT = 5000L;
 
     public static final int LOTTO_TICKET_PRICE = 1000;
 
