@@ -18,7 +18,7 @@ public class LottoServiceTest {
     @DisplayName("사용자 로또 입력이 없는 case에서 금액에 대해 알맞은 로또 구매 갯수를 추출한다.")
     void lottoGroupSizeTest(Money money, int expectedResult) {
         LottoService lottoService = new LottoService(money, 0);
-        lottoService.setUserInputLottoGroup(new ArrayList<>());
+        lottoService.setLottoGroupWithUserManualLottoInput(new ArrayList<>());
         long times = lottoService.getTimes();
         assertThat(times).isEqualTo(expectedResult);
     }

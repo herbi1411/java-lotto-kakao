@@ -24,15 +24,15 @@ public class LottoController {
         Long manualLottoInputNumber = inputView.getManualLottoNumber();
         lottoService = new LottoService(money, manualLottoInputNumber);
 
-        List<String> manualLottoGroup = inputView.getManualLottoGroup(manualLottoInputNumber);
-        lottoService.setUserInputLottoGroup(manualLottoGroup);
+        List<String> manualLottoGroupInputList = inputView.getManualLottoGroup(manualLottoInputNumber);
+        lottoService.setLottoGroupWithUserManualLottoInput(manualLottoGroupInputList);
 
         long times = lottoService.getTimes();
-        if (lottoService.getTimes() < 1) {
+        if (times < 1) {
             return;
         }
 
-        printLottoGenerateStatus(manualLottoInputNumber, times);
+        printLottoGroupStatus(manualLottoInputNumber, times);
 
         String lottoString = inputView.getLottoString();
         int bonusNumber = inputView.getBonus();
@@ -41,7 +41,7 @@ public class LottoController {
         printLottoResult();
     }
 
-    private void printLottoGenerateStatus(Long manualLottoInputNumber, long times) {
+    private void printLottoGroupStatus(Long manualLottoInputNumber, long times) {
         outputView.putTimes(times - manualLottoInputNumber, manualLottoInputNumber);
         outputView.printLottoGroup(lottoService.getLottoGroup());
     }

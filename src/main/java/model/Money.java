@@ -7,17 +7,17 @@ public class Money {
     private final long money;
 
     public Money(long money) {
-        validateMoneyisNotNegative(money);
+        validateMoneyIsNotNegative(money);
         this.money = money;
     }
 
     public Money(String money) {
         long parsedMoney = Long.parseLong(money);
-        validateMoneyisNotNegative(parsedMoney);
+        validateMoneyIsNotNegative(parsedMoney);
         this.money = parsedMoney;
     }
 
-    private void validateMoneyisNotNegative(long money) {
+    private void validateMoneyIsNotNegative(long money) {
         if (money < 0) {
             throw new LottoException(LottoExceptionCode.NEGATIVE_MONEY);
         }

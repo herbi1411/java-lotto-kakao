@@ -16,5 +16,5 @@ public class LottoConstant {
     public static final int LOTTO_TICKET_PRICE = 1000;
 
     // 로또 번호 집합 input시 delimiter
-    public static final String LOTTO_NUMBER_DELIMITER = ", ";
+    public static final String LOTTO_STRING_DELIMITER = ", ";
 }

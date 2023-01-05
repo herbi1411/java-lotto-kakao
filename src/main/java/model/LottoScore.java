@@ -19,7 +19,7 @@ public class LottoScore {
 
     private void validateParams(int matchNumber, boolean isMatchBonus) {
         if (matchNumber < 0 || matchNumber > LOTTO_COUNT || (matchNumber == LOTTO_COUNT && isMatchBonus)) {
-            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_MATCH_NUMBER);
+            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_SCORE);
         }
     }
 

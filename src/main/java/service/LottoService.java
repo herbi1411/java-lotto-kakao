@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static constant.LottoConstant.LOTTO_NUMBER_DELIMITER;
+import static constant.LottoConstant.LOTTO_STRING_DELIMITER;
 import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class LottoService {
@@ -34,16 +34,16 @@ public class LottoService {
         }
     }
 
-    public void setUserInputLottoGroup(List<String> userInputLottoStringGroup) {
-        List<String> copiedUserInputLottoStringGroup = new ArrayList<>(userInputLottoStringGroup);
-        List<Lotto> userInputLottoGroup = copiedUserInputLottoStringGroup.stream()
-                .map(lottoString -> new Lotto(lottoString, LOTTO_NUMBER_DELIMITER))
+    public void setLottoGroupWithUserManualLottoInput(List<String> manualLottoGroupInputList) {
+        List<String> copiedUserInputLottoStringGroup = new ArrayList<>(manualLottoGroupInputList);
+        List<Lotto> userInputLottoList = copiedUserInputLottoStringGroup.stream()
+                .map(lottoString -> new Lotto(lottoString, LOTTO_STRING_DELIMITER))
                 .collect(Collectors.toList());
-        this.lottoGroup = new LottoGroup(times - manualLottoInputNumber, userInputLottoGroup);
+        this.lottoGroup = new LottoGroup(times - manualLottoInputNumber, userInputLottoList);
     }
 
     public void createWinningLotto(String lottoString, int bonusNumber) {
-        Lotto winningLotto = new Lotto(lottoString, LOTTO_NUMBER_DELIMITER);
+        Lotto winningLotto = new Lotto(lottoString, LOTTO_STRING_DELIMITER);
         this.winningLottoSet = new WinningLottoSet(winningLotto, bonusNumber);
     }
 

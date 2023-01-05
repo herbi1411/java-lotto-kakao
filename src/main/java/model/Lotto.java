@@ -18,12 +18,12 @@ public class Lotto {
     private static final List<Integer> possibleLottoNumberList = generatePossibleLottoNumberList();
 
     public Lotto() {
-        this.lottoNumbers = convertIntegerListToLottoNumberList(getLottoIntegerList());
+        this.lottoNumbers = convertIntegerListToLottoNumberSet(getLottoIntegerList());
     }
 
     public Lotto(List<Integer> lottoIntegerList) {
         validateLottoLength(lottoIntegerList);
-        this.lottoNumbers = convertIntegerListToLottoNumberList(lottoIntegerList);
+        this.lottoNumbers = convertIntegerListToLottoNumberSet(lottoIntegerList);
     }
 
     public Lotto(String lottoString, String delimiter) {
@@ -35,7 +35,7 @@ public class Lotto {
                 .collect(Collectors.toList());
 
         validateLottoLength(lottoIntegerList);
-        this.lottoNumbers = convertIntegerListToLottoNumberList(lottoIntegerList);
+        this.lottoNumbers = convertIntegerListToLottoNumberSet(lottoIntegerList);
     }
 
     private List<Integer> getLottoIntegerList() {
@@ -43,9 +43,8 @@ public class Lotto {
         return possibleLottoNumberList.subList(0, LOTTO_COUNT);
     }
 
-    private Set<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> LottoIntegerList) {
+    private Set<LottoNumber> convertIntegerListToLottoNumberSet(List<Integer> LottoIntegerList) {
         return LottoIntegerList.stream()
-                .sorted()
                 .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }

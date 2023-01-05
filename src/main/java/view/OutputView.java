@@ -26,7 +26,7 @@ public class OutputView {
                 .map(LottoNumber::getNumber)
                 .sorted()
                 .map(lottoNumberInt -> Integer.toString(lottoNumberInt))
-                .collect(Collectors.joining(LottoConstant.LOTTO_NUMBER_DELIMITER));
+                .collect(Collectors.joining(LottoConstant.LOTTO_STRING_DELIMITER));
         System.out.println("[" + lottoNumberString + "]");
     }
 

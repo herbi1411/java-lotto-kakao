@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static exception.LottoExceptionCode.INVALID_LOTTO_MATCH_NUMBER;
+import static exception.LottoExceptionCode.INVALID_LOTTO_SCORE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoScoreTest {
@@ -19,7 +19,7 @@ public class LottoScoreTest {
     void InvalidScoreExceptionTest(int matchNumber, boolean isMatchBonus) {
         assertThatThrownBy(() -> new LottoScore(matchNumber, isMatchBonus))
                 .isInstanceOf(LottoException.class)
-                .hasMessage(INVALID_LOTTO_MATCH_NUMBER.getErrorMessage());
+                .hasMessage(INVALID_LOTTO_SCORE.getErrorMessage());
     }
 
     static Stream<Arguments> getInvalidScoreExceptionTestData() {
