@@ -4,6 +4,7 @@ import exception.LottoException;
 import exception.LottoExceptionCode;
 import model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,8 @@ public class LottoService {
     }
 
     public void setUserInputLottoGroup(List<String> userInputLottoStringGroup) {
-        List<Lotto> userInputLottoGroup = userInputLottoStringGroup.stream()
+        List<String> copiedUserInputLottoStringGroup = new ArrayList<>(userInputLottoStringGroup);
+        List<Lotto> userInputLottoGroup = copiedUserInputLottoStringGroup.stream()
                 .map(lottoString -> new Lotto(lottoString, LOTTO_NUMBER_DELIMITER))
                 .collect(Collectors.toList());
         this.lottoGroup = new LottoGroup(times - manualLottoInputNumber, userInputLottoGroup);

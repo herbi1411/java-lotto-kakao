@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static constant.LottoConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPrizeTest {
@@ -26,13 +27,13 @@ public class LottoPrizeTest {
                 Arguments.of(new LottoScore(1, true), 0L),
                 Arguments.of(new LottoScore(2, false), 0L),
                 Arguments.of(new LottoScore(2, true), 0L),
-                Arguments.of(new LottoScore(3, false), 5_000L),
-                Arguments.of(new LottoScore(3, true), 5_000L),
-                Arguments.of(new LottoScore(4, false), 50_000L),
-                Arguments.of(new LottoScore(4, true), 50_000L),
-                Arguments.of(new LottoScore(5, false), 1_500_000L),
-                Arguments.of(new LottoScore(5, true), 30_000_000L),
-                Arguments.of(new LottoScore(6, false), 2_000_000_000L)
+                Arguments.of(new LottoScore(3, false), LOTTO_FIFTH_PRIZE_AMOUNT),
+                Arguments.of(new LottoScore(3, true), LOTTO_FIFTH_PRIZE_AMOUNT),
+                Arguments.of(new LottoScore(4, false), LOTTO_FOURTH_PRIZE_AMOUNT),
+                Arguments.of(new LottoScore(4, true), LOTTO_FOURTH_PRIZE_AMOUNT),
+                Arguments.of(new LottoScore(5, false), LOTTO_THIRD_PRIZE_AMOUNT),
+                Arguments.of(new LottoScore(5, true), LOTTO_SECOND_PRIZE_AMOUNT),
+                Arguments.of(new LottoScore(6, false), LOTTO_FIRST_PRIZE_AMOUNT)
         );
     }
 }

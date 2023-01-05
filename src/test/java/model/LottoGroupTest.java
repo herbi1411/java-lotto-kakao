@@ -21,18 +21,18 @@ public class LottoGroupTest {
     }
 
     @ParameterizedTest
-    @MethodSource("getLottoGroupOrderTestData")
-    @DisplayName("랜덤 생성한 숫자로 로또를 생성했을 때 정렬된 상태로 생성이 된다")
-    void lottoGroupOrderTest(List<Lotto> givenLottoGroup, List<Lotto> expected) {
-        LottoGroup lottoGroup = new LottoGroup(givenLottoGroup);
-        assertThat(lottoGroup.getLottoGroup()).isEqualTo(expected);
+    @MethodSource("userInputLottoGroupConstructorTestData")
+    @DisplayName("로또 그룹의 일부요소가 생성자로 주어질때 자동 생성된 로또와 합쳐서 둘을 합친 길이를 갖는 로또그룹을 반환한다.")
+    void userInputLottoGroupConstructorTest(long autoGenerateNumber, List<Lotto> userInputLottoGroup, int expectedSize) {
+        LottoGroup lottoGroup = new LottoGroup(autoGenerateNumber, userInputLottoGroup);
+        assertThat(lottoGroup.getLottoGroup().size()).isEqualTo(expectedSize);
     }
 
-    static Stream<Arguments> getLottoGroupOrderTestData() {
+    static Stream<Arguments> userInputLottoGroupConstructorTestData() {
         return Stream.of(
-                Arguments.of(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))), List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)))),
-                Arguments.of(List.of(new Lotto(List.of(6, 5, 4, 3, 2, 1))), List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)))),
-                Arguments.of(List.of(new Lotto(List.of(10, 11, 12, 13, 14, 15))), List.of(new Lotto(List.of(10, 11, 12, 13, 14, 15))))
+                Arguments.of(3L, List.of(new Lotto(), new Lotto()), 5),
+                Arguments.of(5L, List.of(new Lotto()), 6),
+                Arguments.of(2L, List.of(new Lotto(), new Lotto(), new Lotto()), 5)
         );
     }
 }

@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGroup {
     private final List<Lotto> lottoGroup;
@@ -20,7 +19,7 @@ public class LottoGroup {
     }
 
     public LottoGroup(long autoGenerateNumber, List<Lotto> userInputLottoGroup) {
-        this.lottoGroup = userInputLottoGroup;
+        this.lottoGroup = new ArrayList<>(userInputLottoGroup);
         for (int i = 0; i < autoGenerateNumber; i++) {
             lottoGroup.add(new Lotto());
         }
@@ -28,10 +27,5 @@ public class LottoGroup {
 
     public List<Lotto> getLottoGroup() {
         return Collections.unmodifiableList(this.lottoGroup);
-    }
-
-    @Override
-    public String toString() {
-        return lottoGroup.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
     }
 }
