@@ -19,6 +19,13 @@ public class LottoGroup {
         this.lottoGroup = lottoGroup;
     }
 
+    public LottoGroup(long autoGenerateNumber, List<Lotto> userInputLottoGroup) {
+        this.lottoGroup = userInputLottoGroup;
+        for (int i = 0; i < autoGenerateNumber; i++) {
+            lottoGroup.add(new Lotto());
+        }
+    }
+
     public List<Lotto> getLottoGroup() {
         return Collections.unmodifiableList(this.lottoGroup);
     }

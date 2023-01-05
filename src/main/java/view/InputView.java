@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -22,5 +24,23 @@ public class InputView {
     public int getBonus() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    public Long getManualLottoNumber() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주새요.");
+        return Long.parseLong(scanner.nextLine());
+    }
+
+    public List<String> getManualLottoGroup(Long manualLottoInputNumber) {
+        List<String> manualLottoGroup = new ArrayList<>();
+        if (manualLottoInputNumber > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
+        for (int i = 0; i < manualLottoInputNumber; i++) {
+            String line = scanner.nextLine();
+            manualLottoGroup.add(line);
+        }
+
+        return manualLottoGroup;
     }
 }

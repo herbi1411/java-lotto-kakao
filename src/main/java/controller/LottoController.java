@@ -5,6 +5,8 @@ import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -19,24 +21,39 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(inputView.inputMoney());
-        lottoService = new LottoService(money);
+        Long manualLottoInputNumber = inputView.getManualLottoNumber();
+        lottoService = new LottoService(money, manualLottoInputNumber);
+
+        List<String> manualLottoGroup = inputView.getManualLottoGroup(manualLottoInputNumber);
+        lottoService.setUserInputLottoGroup(manualLottoGroup);
 
         long times = lottoService.getTimes();
-        outputView.putTimes(times);
-
-        if (times < 1) {
+        if (lottoService.getTimes() < 1) {
             return;
         }
 
-        outputView.printLottoGroup(lottoService.getLottoGroup());
+        printLottoGenerateStatus(manualLottoInputNumber, times);
 
         String lottoString = inputView.getLottoString();
         int bonusNumber = inputView.getBonus();
+        generateLottoResult(lottoString, bonusNumber);
 
+        printLottoResult();
+    }
+
+    private void printLottoGenerateStatus(Long manualLottoInputNumber, long times) {
+        outputView.putTimes(times - manualLottoInputNumber, manualLottoInputNumber);
+        outputView.printLottoGroup(lottoService.getLottoGroup());
+    }
+
+    private void generateLottoResult(String lottoString, int bonusNumber) {
         lottoService.createWinningLotto(lottoString, bonusNumber);
         lottoService.generateLottoResult();
+    }
 
-        outputView.printResult(lottoService.gerLottoResult());
+    private void printLottoResult() {
+        outputView.printResult(lottoService.getLottoResult());
         outputView.printEarningRate(lottoService.getEarningRate());
     }
+
 }

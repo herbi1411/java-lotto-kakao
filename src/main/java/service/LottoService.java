@@ -1,6 +1,11 @@
 package service;
 
+import exception.LottoException;
+import exception.LottoExceptionCode;
 import model.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static constant.LottoConstant.LOTTO_NUMBER_DELIMITER;
 import static constant.LottoConstant.LOTTO_TICKET_PRICE;
@@ -8,22 +13,31 @@ import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 public class LottoService {
     private final Money money;
     private final long times;
-    private final LottoGroup lottoGroup;
+    private final long manualLottoInputNumber;
+    private LottoGroup lottoGroup;
     private WinningLottoSet winningLottoSet;
     private LottoResult lottoResult;
 
-    public LottoService(Money money) {
+    public LottoService(Money money, long manualLottoInputNumber) {
         this.money = money;
         this.times = money.getMoney() / LOTTO_TICKET_PRICE;
+        this.manualLottoInputNumber = manualLottoInputNumber;
+
+        validateManualTimes();
         this.lottoGroup = new LottoGroup(this.times);
     }
 
-    public long getTimes() {
-        return this.times;
+    private void validateManualTimes() {
+        if (this.times < manualLottoInputNumber) {
+            throw new LottoException(LottoExceptionCode.INVALID_MANUAL_LOTTO_COUNT);
+        }
     }
 
-    public LottoGroup getLottoGroup() {
-        return this.lottoGroup;
+    public void setUserInputLottoGroup(List<String> userInputLottoStringGroup) {
+        List<Lotto> userInputLottoGroup = userInputLottoStringGroup.stream()
+                .map(lottoString -> new Lotto(lottoString, LOTTO_NUMBER_DELIMITER))
+                .collect(Collectors.toList());
+        this.lottoGroup = new LottoGroup(times - manualLottoInputNumber, userInputLottoGroup);
     }
 
     public void createWinningLotto(String lottoString, int bonusNumber) {
@@ -39,7 +53,15 @@ public class LottoService {
         return lottoResult.getEarningRate();
     }
 
-    public LottoResult gerLottoResult() {
+    public LottoGroup getLottoGroup() {
+        return this.lottoGroup;
+    }
+
+    public LottoResult getLottoResult() {
         return this.lottoResult;
+    }
+
+    public long getTimes() {
+        return this.times;
     }
 }

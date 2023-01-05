@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void putTimes(long times) {
-        System.out.println(times + "개를 구매했습니다.");
+    public void putTimes(long autoGenerateNumber, long manualGenerateNumber) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", manualGenerateNumber, autoGenerateNumber);
     }
 
     public void printLottoGroup(LottoGroup lottoGroup) {
@@ -23,7 +23,9 @@ public class OutputView {
         Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         String lottoNumberString = lottoNumbers
                 .stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(lottoNumberInt -> Integer.toString(lottoNumberInt))
                 .collect(Collectors.joining(LottoConstant.LOTTO_NUMBER_DELIMITER));
         System.out.println("[" + lottoNumberString + "]");
     }
