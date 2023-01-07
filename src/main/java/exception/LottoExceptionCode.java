@@ -1,7 +1,8 @@
 package exception;
 
 public enum LottoExceptionCode {
-    INVALID_LOTTO_NUMBER("로또 범위에 맞지 않는 숫자입니다.");
+    INVALID_LOTTO_NUMBER("로또 범위에 맞지 않는 숫자입니다."),
+    INVALID_LOTTO_LENGTH("잘못된 로또 길이입니다.");
     private final String message;
 
     LottoExceptionCode(String message) {
