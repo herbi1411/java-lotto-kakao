@@ -1,7 +1,10 @@
 package view;
 
 import constant.LottoConstant;
-import model.*;
+import model.Lotto;
+import model.LottoNumber;
+import model.LottoPrize;
+import service.LottoResult;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +16,8 @@ public class OutputView {
         System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", manualGenerateNumber, autoGenerateNumber);
     }
 
-    public void printLottoGroup(LottoGroup lottoGroup) {
-        List<Lotto> lottoList = lottoGroup.getLottoGroup();
-        lottoList.forEach(this::printLotto);
+    public void printLottoGroup(List<Lotto> lottoGroup) {
+        lottoGroup.forEach(this::printLotto);
         System.out.println();
     }
 

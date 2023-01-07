@@ -5,19 +5,19 @@ import exception.LottoExceptionCode;
 
 import java.util.Set;
 
-public class WinningLottoSet {
+public class LastWeekWinningLotto {
 
     private final Lotto winningLotto;
     private final Integer bonusNumber;
 
-    public WinningLottoSet(Lotto winningLotto, int bonusNumber) {
+    public LastWeekWinningLotto(Lotto winningLotto, int bonusNumber) {
 
-        validateWinningLottoSet(winningLotto, bonusNumber);
+        validateLastWeekWinningLotto(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateWinningLottoSet(Lotto winningLotto, int bonusNumber) {
+    private void validateLastWeekWinningLotto(Lotto winningLotto, int bonusNumber) {
         Set<LottoNumber> lottoNumbers = winningLotto.getNumbers();
         LottoNumber wrappedBonusNumber = LottoNumber.from(bonusNumber);
 

@@ -26,7 +26,7 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public Long getManualLottoNumber() {
+    public Long inputManualLottoNumber() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주새요.");
         return Long.parseLong(scanner.nextLine());
     }

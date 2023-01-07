@@ -11,12 +11,12 @@ import java.util.stream.Stream;
 import static constant.LottoConstant.LOTTO_STRING_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningLottoTest {
+public class LastWeekWinningLottoTest {
     @ParameterizedTest
     @MethodSource("getGetScoreMethodTestData")
     @DisplayName("지난 주 당첨번호와 로또 번호를 비교해 올바른 결과값 객체를 생성한다.")
     void getScoreMethodTest(String lottoString, int bonusNumber, Lotto lotto, LottoScore expected) {
-        WinningLottoSet winningLotto = new WinningLottoSet(new Lotto(lottoString, LOTTO_STRING_DELIMITER), bonusNumber);
+        LastWeekWinningLotto winningLotto = new LastWeekWinningLotto(new Lotto(lottoString, LOTTO_STRING_DELIMITER), bonusNumber);
         LottoScore result = winningLotto.getScore(lotto);
         assertThat(result).isEqualTo(expected);
     }
