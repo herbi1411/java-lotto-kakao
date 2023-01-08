@@ -14,15 +14,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoScoreTest {
 
     @ParameterizedTest
-    @MethodSource("getInvalidScoreExceptionTestData")
+    @MethodSource("invalidScoreExceptionTestData")
     @DisplayName("생성될 수 없는 로또 점수가 생성되면 예외를 발생시킨다.")
-    void InvalidScoreExceptionTest(int matchNumber, boolean isMatchBonus) {
+    void invalid_score_throw_exception(int matchNumber, boolean isMatchBonus) {
         assertThatThrownBy(() -> new LottoScore(matchNumber, isMatchBonus))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(INVALID_LOTTO_SCORE.getErrorMessage());
     }
 
-    static Stream<Arguments> getInvalidScoreExceptionTestData() {
+    static Stream<Arguments> invalidScoreExceptionTestData() {
         return Stream.of(
                 Arguments.of(-1, true),
                 Arguments.of(6, true),

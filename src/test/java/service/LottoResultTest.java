@@ -20,9 +20,16 @@ public class LottoResultTest {
     @MethodSource("getEarningRateTestData")
     @DisplayName("로또 당첨에 따른 올바른 수익률을 계산한다.")
     void earningRateTest(List<Lotto> lottosList, LastWeekWinningLotto winningLotto, long times, double expectedEarningRate) {
+
+        //given
         LottoGroup lottoGroup = new LottoGroup(lottosList);
         LottoResult lottoResult = new LottoResult(lottoGroup, winningLotto, new Money(times * LOTTO_TICKET_PRICE));
-        assertThat(lottoResult.getEarningRate()).isEqualTo(expectedEarningRate);
+
+        //when
+        double result = lottoResult.getEarningRate();
+
+        //then
+        assertThat(result).isEqualTo(expectedEarningRate);
     }
 
     static Stream<Arguments> getEarningRateTestData() {

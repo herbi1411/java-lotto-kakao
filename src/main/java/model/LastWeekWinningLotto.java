@@ -26,7 +26,7 @@ public class LastWeekWinningLotto {
         }
     }
 
-    public LottoScore getScore(Lotto lotto) {
+    public LottoScore calculateScore(Lotto lotto) {
         Set<LottoNumber> winningLottoNumbers = winningLotto.getNumbers();
         int matchNumber = (int) lotto.getNumbers()
                 .stream()

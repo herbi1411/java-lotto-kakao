@@ -14,17 +14,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGroupTest {
     @Test
     @DisplayName("지정한 횟수만큼 로또 객체를 배열로 생성한다.")
-    void lottoGroupLengthTest() {
+    void generated_list_length_test() {
+        //given
         LottoGroup lottoGroup = new LottoGroup(10L);
+
+        //when
         List<Lotto> lottoList = lottoGroup.getLottoGroup();
+
+        //then
         assertThat(lottoList.size()).isEqualTo(10);
     }
 
     @ParameterizedTest
     @MethodSource("userInputLottoGroupConstructorTestData")
     @DisplayName("로또 그룹의 일부요소가 생성자로 주어질때 자동 생성된 로또와 합쳐서 둘을 합친 길이를 갖는 로또그룹을 반환한다.")
-    void userInputLottoGroupConstructorTest(long autoGenerateNumber, List<Lotto> userInputLottoGroup, int expectedSize) {
+    void userInput_LottoGroup_constructor_test(long autoGenerateNumber, List<Lotto> userInputLottoGroup, int expectedSize) {
+        //given
+
+        //when
         LottoGroup lottoGroup = new LottoGroup(autoGenerateNumber, userInputLottoGroup);
+
+        //then
         assertThat(lottoGroup.getLottoGroup().size()).isEqualTo(expectedSize);
     }
 

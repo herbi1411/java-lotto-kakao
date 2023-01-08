@@ -11,7 +11,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1000, -1, 0, 46, 47})
     @DisplayName("로또 범위가 아닌 숫자로 LottoNumber를 생성할 때 예외가 발생한다.")
-    void invalidLottoNumberExceptionTest(int invalidLottoNumber) {
+    void invalid_LottoNumber_throw_exception(int invalidLottoNumber) {
         Assertions.assertThatThrownBy(
                         () -> LottoNumber.from(invalidLottoNumber)
                 ).isInstanceOf(LottoException.class)

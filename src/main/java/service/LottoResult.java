@@ -24,7 +24,7 @@ public class LottoResult {
     private void setLottoPrizeMap(LottoGroup lottoGroup, LastWeekWinningLotto lastWeekWinningLotto) {
         lottoGroup.getLottoGroup()
                 .stream()
-                .map(lastWeekWinningLotto::getScore)
+                .map(lastWeekWinningLotto::calculateScore)
                 .map(lottoScore -> LottoPrize.valueOf(lottoScore.getMatchNumber(), lottoScore.isMatchBonus()))
                 .forEach(lottoPrize -> lottoPrizeMap.put(lottoPrize, lottoPrizeMap.get(lottoPrize) + 1));
     }
