@@ -4,14 +4,25 @@ import constant.LottoConstant;
 import exception.LottoException;
 import exception.LottoExceptionCode;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
     private final int number;
+    private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 
-    public LottoNumber(int num) {
+    private LottoNumber(int num) {
         validateLottoNumber(num);
         this.number = num;
+        lottoNumberMap.put(num, this);
+    }
+
+    public static LottoNumber of(int num) {
+        if (lottoNumberMap.containsKey(num)) {
+            return lottoNumberMap.get(num);
+        }
+        return new LottoNumber(num);
     }
 
     private void validateLottoNumber(int num) {

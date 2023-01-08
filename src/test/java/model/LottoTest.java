@@ -27,7 +27,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(normalLottoNumberList);
         //then
         assertThat(lotto.getNumberList()).isEqualTo(normalLottoNumberList.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 

@@ -20,7 +20,7 @@ public class Lotto {
         validateLottoNumberDuplication(lottoNumberList);
         this.numberList = lottoNumberList
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
@@ -42,7 +42,7 @@ public class Lotto {
                 .subList(0, LOTTO_LENGTH)
                 .stream()
                 .sorted()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

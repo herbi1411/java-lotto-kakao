@@ -15,7 +15,7 @@ public class LottoNumberTest {
         //given
 
         //when
-        LottoNumber lottoNumber = new LottoNumber(num);
+        LottoNumber lottoNumber = LottoNumber.of(num);
 
         //then
         Assertions.assertThat(lottoNumber.getNumber()).isEqualTo(num);
@@ -31,7 +31,7 @@ public class LottoNumberTest {
 
         //then
         Assertions.assertThatThrownBy(
-                        () -> new LottoNumber(num))
+                        () -> LottoNumber.of(num))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(LottoExceptionCode.INVALID_LOTTO_NUMBER.getMessage());
     }
