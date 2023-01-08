@@ -11,6 +11,14 @@ public class LottoScore {
         this.isMatchBonusNumber = isMatchBonusNumber;
     }
 
+    public int getMatchNumber() {
+        return matchNumber;
+    }
+
+    public boolean isMatchBonusNumber() {
+        return isMatchBonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
