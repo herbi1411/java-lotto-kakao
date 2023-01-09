@@ -4,7 +4,7 @@ import constant.LottoConstant;
 import model.Lotto;
 import model.LottoNumber;
 import model.LottoPrize;
-import service.LottoResult;
+import model.LottoPrizeMap;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class OutputView {
         System.out.println("[" + lottoNumberString + "]");
     }
 
-    public void printResult(LottoResult lottoResult) {
+    public void printResult(LottoPrizeMap lottoResult) {
         Map<LottoPrize, Long> lottoPrizeMap = lottoResult.getLottoPrizeMap();
 
         System.out.println("당첨 통계");

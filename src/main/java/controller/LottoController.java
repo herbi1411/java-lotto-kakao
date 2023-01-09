@@ -1,23 +1,22 @@
 package controller;
 
-import model.Lotto;
-import model.LottoGroup;
-import model.Money;
+import model.*;
 import service.LottoGroupGenerateService;
-import service.LottoJudgeService;
-import service.LottoResult;
+import service.LottoRankService;
+import service.LottoResultService;
 import service.LottoValidateService;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
 
+import static constant.LottoConstant.LOTTO_STRING_DELIMITER;
+
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoValidateService lottoValidateService;
     private final LottoGroupGenerateService lottoGroupGenerateService;
-    private final LottoJudgeService lottoJudgeService;
 
 
     public LottoController() {
@@ -25,7 +24,6 @@ public class LottoController {
         this.outputView = new OutputView();
         this.lottoValidateService = new LottoValidateService();
         this.lottoGroupGenerateService = new LottoGroupGenerateService();
-        this.lottoJudgeService = new LottoJudgeService();
     }
 
     public void run() {
@@ -40,8 +38,8 @@ public class LottoController {
         LottoGroup lottoGroup = lottoGroupGenerateService.generateLottoGroup(money, inputView.getManualLottoGroup(manualLottoInputNumber));
         printLottoGroupStatus(lottoGroup.getLottoGroup(), manualLottoInputNumber);
 
-        LottoResult lottoResult = getLottoresult(lottoGroup, money);
-        printLottoResult(lottoResult);
+        LottoResultDto lottoResultDto = getLottoresult(lottoGroup, money);
+        printLottoResult(lottoResultDto);
     }
 
     private void printLottoGroupStatus(List<Lotto> lottoGroup, Long manualLottoInputNumber) {
@@ -49,14 +47,21 @@ public class LottoController {
         outputView.printLottoGroup(lottoGroup);
     }
 
-    private LottoResult getLottoresult(LottoGroup lottoGroup, Money money) {
+    private LottoResultDto getLottoresult(LottoGroup lottoGroup, Money money) {
         String lottoString = inputView.getLottoString();
         int bonusNumber = inputView.getBonus();
-        return lottoJudgeService.judge(lottoGroup, lottoString, bonusNumber, money);
+
+        Lotto winningLotto = new Lotto(lottoString, LOTTO_STRING_DELIMITER);
+        LottoRankService lottoRankService = new LottoRankService(lottoGroup, winningLotto, bonusNumber);
+
+        List<LottoPrize> lottoPrizes = lottoRankService.calculateScores();
+        LottoResultService lottoResultService = new LottoResultService(lottoPrizes, money);
+
+        return lottoResultService.toLottoResultDto();
     }
 
-    private void printLottoResult(LottoResult lottoResult) {
-        outputView.printResult(lottoResult);
-        outputView.printEarningRate(lottoResult.getEarningRate());
+    private void printLottoResult(LottoResultDto lottoResultDto) {
+        outputView.printResult(lottoResultDto.getLottoPrizeMap());
+        outputView.printEarningRate(lottoResultDto.getEarningRate());
     }
 }

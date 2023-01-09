@@ -14,25 +14,25 @@ public class LottoPrizeTest {
     @ParameterizedTest
     @MethodSource("prizeAmountTestData")
     @DisplayName("로또 점수에 따른 올바른 로또 상금을 반환한다.")
-    void prize_amount_Test(LottoScore lottoScore, Long expectedPrize) {
-        assertThat(LottoPrize.valueOf(lottoScore.getMatchNumber(), lottoScore.isMatchBonus()).getPrizeAmount())
+    void prize_amount_Test(int matchNumber, boolean isMatchBonus, Long expectedPrize) {
+        assertThat(LottoPrize.valueOf(matchNumber, isMatchBonus).getPrizeAmount())
                 .isEqualTo(expectedPrize);
     }
 
     static Stream<Arguments> prizeAmountTestData() {
         return Stream.of(
-                Arguments.of(new LottoScore(0, false), 0L),
-                Arguments.of(new LottoScore(1, false), 0L),
-                Arguments.of(new LottoScore(1, true), 0L),
-                Arguments.of(new LottoScore(2, false), 0L),
-                Arguments.of(new LottoScore(2, true), 0L),
-                Arguments.of(new LottoScore(3, false), LOTTO_FIFTH_PRIZE_AMOUNT),
-                Arguments.of(new LottoScore(3, true), LOTTO_FIFTH_PRIZE_AMOUNT),
-                Arguments.of(new LottoScore(4, false), LOTTO_FOURTH_PRIZE_AMOUNT),
-                Arguments.of(new LottoScore(4, true), LOTTO_FOURTH_PRIZE_AMOUNT),
-                Arguments.of(new LottoScore(5, false), LOTTO_THIRD_PRIZE_AMOUNT),
-                Arguments.of(new LottoScore(5, true), LOTTO_SECOND_PRIZE_AMOUNT),
-                Arguments.of(new LottoScore(6, false), LOTTO_FIRST_PRIZE_AMOUNT)
+                Arguments.of(0, false, 0L),
+                Arguments.of(1, false, 0L),
+                Arguments.of(1, true, 0L),
+                Arguments.of(2, false, 0L),
+                Arguments.of(2, true, 0L),
+                Arguments.of(3, false, LOTTO_FIFTH_PRIZE_AMOUNT),
+                Arguments.of(3, true, LOTTO_FIFTH_PRIZE_AMOUNT),
+                Arguments.of(4, false, LOTTO_FOURTH_PRIZE_AMOUNT),
+                Arguments.of(4, true, LOTTO_FOURTH_PRIZE_AMOUNT),
+                Arguments.of(5, false, LOTTO_THIRD_PRIZE_AMOUNT),
+                Arguments.of(5, true, LOTTO_SECOND_PRIZE_AMOUNT),
+                Arguments.of(6, false, LOTTO_FIRST_PRIZE_AMOUNT)
         );
     }
 }

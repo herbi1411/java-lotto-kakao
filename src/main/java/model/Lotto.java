@@ -72,6 +72,20 @@ public class Lotto {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean contains(int number) {
+        return contains(LottoNumber.from(number));
+    }
+
+    public int matchNumber(Lotto other) {
+        return (int) this.lottoNumbers.stream()
+                .filter(other::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
