@@ -1,8 +1,9 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class InputView {
     private final Scanner scanner;
@@ -11,9 +12,9 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public String inputMoney() {
+    public Long inputMoney() {
         System.out.println("구매금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return Long.parseLong(scanner.nextLine());
     }
 
     public String getLottoString() {
@@ -21,7 +22,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public int getBonus() {
+    public int getBonusBallNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
@@ -31,16 +32,14 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public List<String> getManualLottoGroup(Long manualLottoInputNumber) {
-        List<String> manualLottoGroup = new ArrayList<>();
+    public List<String> getManualLottoGroupString(Long manualLottoInputNumber) {
         if (manualLottoInputNumber > 0) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         }
-        for (int i = 0; i < manualLottoInputNumber; i++) {
-            String line = scanner.nextLine();
-            manualLottoGroup.add(line);
-        }
 
-        return manualLottoGroup;
+        return LongStream.range(0, manualLottoInputNumber)
+                .boxed()
+                .map(i -> scanner.nextLine())
+                .collect(Collectors.toList());
     }
 }

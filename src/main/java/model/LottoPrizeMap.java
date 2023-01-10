@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoPrizeMap {
-    private final Map<LottoPrize, Long> lottoPrizeMap;
+    private final Map<LottoPrize, Long> lottoPrizeMap = generateInitialLottoPrizeMap();
 
     public LottoPrizeMap(List<LottoPrize> lottoPrizes) {
-        this.lottoPrizeMap = generateInitialLottoPrizeMap();
-        setLottoPrizeMap(lottoPrizes);
+        lottoPrizes.forEach(lottoPrize -> lottoPrizeMap.put(lottoPrize, lottoPrizeMap.get(lottoPrize) + 1));
     }
 
     private Map<LottoPrize, Long> generateInitialLottoPrizeMap() {
@@ -21,16 +20,11 @@ public class LottoPrizeMap {
         return result;
     }
 
-    private void setLottoPrizeMap(List<LottoPrize> lottoPrizes) {
-        lottoPrizes.forEach(lottoPrize -> lottoPrizeMap.put(lottoPrize, lottoPrizeMap.get(lottoPrize) + 1));
-    }
-
     public long getTotalPrize() {
-        long totalPrize = 0L;
-        for (LottoPrize lottoPrize : lottoPrizeMap.keySet()) {
-            totalPrize += lottoPrize.getPrizeAmount() * lottoPrizeMap.get(lottoPrize);
-        }
-        return totalPrize;
+        return lottoPrizeMap.keySet()
+                .stream()
+                .map(lottoPrize -> lottoPrize.getPrizeAmount() * lottoPrizeMap.get(lottoPrize))
+                .reduce(0L, Long::sum);
     }
 
     public Map<LottoPrize, Long> getLottoPrizeMap() {

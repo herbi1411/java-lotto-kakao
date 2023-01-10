@@ -4,26 +4,37 @@ import exception.LottoException;
 import exception.LottoExceptionCode;
 
 public class Money {
-    private final long money;
+    private long money;
 
     public Money(long money) {
-        validateMoneyIsNotNegative(money);
         this.money = money;
+        validateMoneyIsNotNegative();
     }
 
-    public Money(String money) {
-        long parsedMoney = Long.parseLong(money);
-        validateMoneyIsNotNegative(parsedMoney);
-        this.money = parsedMoney;
+    public Money(Money money) {
+        this.money = money.money;
     }
 
-    private void validateMoneyIsNotNegative(long money) {
-        if (money < 0) {
+    private void validateMoneyIsNotNegative() {
+        if (this.money < 0) {
             throw new LottoException(LottoExceptionCode.NEGATIVE_MONEY);
         }
     }
 
-    public long getMoney() {
-        return money;
+    public void purchase(long price) {
+        this.money -= price;
+        validateMoneyIsNotNegative();
+    }
+
+    public long compare(long other) {
+        return this.money - other;
+    }
+
+    public long dividedByResult(long target) {
+        return this.money / target;
+    }
+
+    public double divideResult(double target) {
+        return target / this.money;
     }
 }

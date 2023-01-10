@@ -48,4 +48,8 @@ public class OutputView {
     public void printEarningRate(double earningRate) {
         System.out.printf("총 수익률은 %.2f입니다.\n", earningRate);
     }
+
+    public void printGameEndMessageWithPoorStatus() {
+        System.out.println("로또를 구매할 수 없어서 게임을 종료합니다!");
+    }
 }
