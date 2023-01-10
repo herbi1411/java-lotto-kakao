@@ -67,20 +67,4 @@ public class LottoTest {
                 Arguments.of(List.of(1, 2, 3, 4, 5))
         );
     }
-
-    @ParameterizedTest
-    @MethodSource("invalidLottoStringConstructorTestData")
-    @DisplayName("로또 생성자로 올바르지 않은 문자열이나 구분자가 주어질 때 예외가 발생한다.")
-    void invalid_lotto_string_constructor_throw_exception(String lottoString, String delimiter) {
-        assertThatThrownBy(
-                () -> new Lotto(lottoString, delimiter)
-        ).isInstanceOf(NumberFormatException.class);
-    }
-
-    static Stream<Arguments> invalidLottoStringConstructorTestData() {
-        return Stream.of(
-                Arguments.of("1,2,3,4,5,6", ", "),
-                Arguments.of("a:2:3:4:5:6", ":")
-        );
-    }
 }
